@@ -60,18 +60,20 @@ jobs:
       - run: ./configure
       - run: make
 
+      - run: echo "RANDOM_SUFFIXX=$(date +%s%m%Y)" >> $GITHUB_ENV
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-make-${{ matrix.os }}
+          name: build-output-make-${{ env.RANDOM_SUFFIXX }}
           path: ${{ github.workspace }}/*
 
       - run: make check
 
+      - run: echo "RANDOM_SUFFIXXX=$(date +%s%m%Y)" >> $GITHUB_ENV
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-make-check-${{ matrix.os }}
+          name: build-output-make-check-${{ env.RANDOM_SUFFIXXX }}
           path: ${{ github.workspace }}/*
 
       - run: ./run_tests.sh
@@ -82,8 +84,9 @@ jobs:
         working-directory: examples/
         if: ${{ contains(matrix.os, 'ubuntu') }}
 
+      - run: echo "RANDOM_SUFFIXXXX=$(date +%s%m%Y)" >> $GITHUB_ENV
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-test-${{ matrix.os }}
+          name: build-output-test-${{ env.RANDOM_SUFFIXXXX }}
           path: ${{ github.workspace }}/*
