@@ -60,7 +60,19 @@ jobs:
       - run: ./configure
       - run: make
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output-make
+          path: ${{ github.workspace }}/*
+
       - run: make check
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output-make-check
+          path: ${{ github.workspace }}/*
 
       - run: ./run_tests.sh
         working-directory: examples/
@@ -69,3 +81,9 @@ jobs:
       - run: ./run_tests_prom.sh
         working-directory: examples/
         if: ${{ contains(matrix.os, 'ubuntu') }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output-test
+          path: ${{ github.workspace }}/*
