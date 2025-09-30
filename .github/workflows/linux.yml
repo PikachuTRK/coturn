@@ -63,7 +63,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-make
+          name: build-output-make-${{ matrix.os }}
           path: ${{ github.workspace }}/*
 
       - run: make check
@@ -71,7 +71,7 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-make-check
+          name: build-output-make-check-${{ matrix.os }}
           path: ${{ github.workspace }}/*
 
       - run: ./run_tests.sh
@@ -85,5 +85,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-output-test
+          name: build-output-test-${{ matrix.os }}
           path: ${{ github.workspace }}/*
