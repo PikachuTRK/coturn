@@ -2,11 +2,12 @@ name: Linux
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "buffer_size"]
     tags: ["4.*"]
   pull_request:
-    branches: ["master"]
-
+    branches: ["master", "buffer_size"]
+  workflow_dispatch:
+    
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
